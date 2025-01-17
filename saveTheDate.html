@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save the Date</title>
+  <style>
+    /* Fade-in effect */
+    body {
+      opacity: 0; /* Start invisible */
+      transition: opacity 1.5s ease; /* Smooth fade-in over 1.5 seconds */
+    }
+
+    body.fade-in {
+      opacity: 1; /* Fully visible */
+    }
+
+    /* Existing styles */
+    .text-box {
+      width: 300px; /* Set the width of the text box */
+      padding: 20px; /* Add some padding */
+      border: 1px solid #b51a09; /* Optional: Add a border */
+      text-align: center; /* Optional: Center the content */
+    }
+
+    .fit-image {
+      display: block; /* Makes the image a block element */
+      margin: 0 auto; /* Centers the image horizontally */
+      max-width: 40%; /* Ensures it fits within the container */
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Playfair Display'; color: #b51a09; font-size: 30px; background-color: #faf9f5;">
+    <div style="width: 35%; margin: 0 auto; padding: 20px; background-color: #faf9f5; border-radius: 8px;" class="text-box">
+      <img src="swans.png" class="fit-image" alt="Description of the image" style="align: center;">
+      <p style="text-align: center;">
+        hi! we're getting married on saturday, august 2, 2025 at the uc berkeley botanical garden
+      </p>
+      <p style="text-align: center;">
+        details to come
+        <br>
+        <a style="color:#edb4ab" href="https://forms.gle/yZaFxAAuVBA7cGVa6">rsvp</a>
+        <sup style="font-size: 14;">asap please!</sup>
+        <br>
+        <p style="text-align: center;">— fred and nora</p>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Add the fade-in effect when the page loads
+    window.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('fade-in');
+    });
+  </script>
+</body>
+</html>

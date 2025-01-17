@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webpage</title>
+  <style>
+    /* General styles */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Playfair Display', sans-serif;
+      color: #b51a09;
+      font-size: 30px;
+      background-color: #faf9f5;
+      margin: 0;
+      overflow: hidden;
+      transition: opacity 5s ease; /* Smooth fade-out transition for everything */
+    }
+
+    .fade-screen {
+      opacity: 0; /* Fade out the entire screen */
+    }
+
+    .text-box {
+      width: 50%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #faf9f5;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .fit-image {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .nice_button {
+      position: absolute;
+      top: 85%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #b51a09;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 30px;
+      font-family: 'Playfair Display', sans-serif;
+      cursor: pointer;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    /* Vigorous Bounce animation */
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translate(-50%, -50%) translateY(0);
+      }
+      40% {
+        transform: translate(-50%, -50%) translateY(-40px);
+      }
+      60% {
+        transform: translate(-50%, -50%) translateY(-25px);
+      }
+    }
+
+    .bouncing {
+      animation: bounce 5s cubic-bezier(0.25, 1.5, 0.5, 1);
+      animation-iteration-count: 5;
+    }
+
+    /* Slide animations */
+    .slide-image {
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 80%;
+      transform: translateY(-50%);
+      opacity: 1; /* Remain visible until full-screen fade */
+    }
+
+    .slide-from-left {
+      left: -150px;
+      animation: slideLeft 5s forwards; /* Slide in (5s) */
+    }
+
+    .slide-from-right {
+      right: -150px;
+      animation: slideRight 5s forwards; /* Slide in (5s) */
+    }
+
+    @keyframes slideLeft {
+      to {
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+    }
+
+    @keyframes slideRight {
+      to {
+        right: 50%;
+        transform: translateX(50%) translateY(-50%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="text-box">
+    <img src="envelope.png" class="fit-image" alt="Description of the image">
+    <button class="nice_button" onclick="playAudioAndAnimate(this)">Open Me</button>
+
+    <!-- Audio element -->
+    <audio id="audioFile" src="cropped_beach_boys.mp3"></audio>
+
+    <!-- Sliding images -->
+    <img src="animation/letter.png" class="slide-image slide-from-left" id="leftImage" style="display: none;">
+    <img src="animation/letter_written.png" class="slide-image slide-from-right" id="rightImage" style="display: none;">
+  </div>
+
+  <script>
+    function playAudioAndAnimate(button) {
+      const audio = document.getElementById('audioFile');
+      const leftImage = document.getElementById('leftImage');
+      const rightImage = document.getElementById('rightImage');
+
+      // Play audio
+      audio.play();
+
+      // Bounce the button
+      button.classList.add('bouncing');
+
+      // After the bounce, show and animate images
+      setTimeout(() => {
+        button.classList.remove('bouncing');
+        leftImage.style.display = 'block';
+        rightImage.style.display = 'block';
+
+        // Add slide animations
+        leftImage.classList.add('slide-from-left');
+        rightImage.classList.add('slide-from-right');
+      }, 5000); // Wait for 5 bounces (2.5 seconds)
+
+      // Fade out the entire screen after animations
+      setTimeout(() => {
+        document.body.classList.add('fade-screen'); // Trigger full-screen fade-out
+      }, 10000); // Total time for bounce (2.5s) + slide (5s)
+
+      // Navigate to the next page after the full-screen fade-out
+      setTimeout(() => {
+        window.location.href = "saveTheDate.html";
+      }, 16000); // Total time for bounce (2.5s) + slide (5s) + screen fade (5s)
+    }
+  </script>
+</body>
+</html>
+
+
+
+
