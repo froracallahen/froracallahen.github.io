@@ -11,7 +11,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      font-family: 'Playfair Display', sans-serif;
+      font-family: 'Rosmerta', sans-serif;
       color: #b51a09;
       font-size: 30px;
       background-color: #faf9f5;
@@ -22,7 +22,10 @@
 
     .fade-screen {
       opacity: 0; /* Fade out the entire screen */
+      transition: opacity 2s ease; /* Change to 5 seconds for a slower fade */
+
     }
+
 
     .text-box {
       width: 50%;
@@ -38,6 +41,12 @@
       margin: 0 auto;
       max-width: 100%;
       height: auto;
+      transition: opacity 0.5s ease; /* Smooth fade-out for the envelope */
+    }
+
+    .fit-image.hidden {
+      opacity: 0; /* Hide the envelope */
+      pointer-events: none; /* Prevent interaction with the envelope */
     }
 
     .nice_button {
@@ -50,111 +59,142 @@
       border: none;
       padding: 10px 20px;
       font-size: 30px;
-      font-family: 'Playfair Display', sans-serif;
+      font-family: 'Rosmerta',
       cursor: pointer;
       border-radius: 8px;
       text-decoration: none;
+      transition: opacity 0.5s ease; /* Smooth fade-out for the button */
     }
 
-    /* Vigorous Bounce animation */
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translate(-50%, -50%) translateY(0);
-      }
-      40% {
-        transform: translate(-50%, -50%) translateY(-40px);
-      }
-      60% {
-        transform: translate(-50%, -50%) translateY(-25px);
-      }
+    .nice_button.hidden {
+      opacity: 0; /* Hide the button */
+      pointer-events: none; /* Disable interaction */
     }
 
-    .bouncing {
-      animation: bounce 5s cubic-bezier(0.25, 1.5, 0.5, 1);
-      animation-iteration-count: 5;
-    }
-
-    /* Slide animations */
-    .slide-image {
+    .image-container {
+      width: 50%; /* Set width of the image area */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden; /* Hide anything outside the boundaries */
       position: absolute;
-      top: 50%;
-      width: 40%;
-      height: 80%;
-      transform: translateY(-50%);
-      opacity: 1; /* Remain visible until full-screen fade */
+      top: -500px; /* Start off-screen (above the viewport) */
+      left: 50%;
+      transform: translate(-50%, 0); /* Center horizontally */
+      opacity: 0; /* Invisible initially */
+      transition: top 1s ease, opacity 1s ease; /* Smooth transition to center */
     }
 
-    .slide-from-left {
-      left: -150px;
-      animation: slideLeft 5s forwards; /* Slide in (5s) */
+    .image-container.visible {
+      top: 50%; /* Move to the center */
+      transform: translate(-50%, -65%); /* Adjust for perfect centering */
+      opacity: 1; /* Make visible */
     }
 
-    .slide-from-right {
-      right: -150px;
-      animation: slideRight 5s forwards; /* Slide in (5s) */
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Adjust image scaling */
+      display: none; /* Hide all images by default */
     }
 
-    @keyframes slideLeft {
-      to {
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-      }
+    img.active {
+      display: block; /* Show the active image */
     }
 
-    @keyframes slideRight {
-      to {
-        right: 50%;
-        transform: translateX(50%) translateY(-50%);
-      }
-    }
+    @font-face {
+    font-family:"Cormorant Garamond";
+    src: url("./fonts/CormorantGaramond-Regular.ttf") format("truetype");
+  }
+
   </style>
 </head>
 <body>
+  <div class="image-container" id="animationContainer">
+      <img src="animation/animate_1.png" alt="Frame 1" class="active">
+      <img src="animation/animate_2.png" alt="Frame 2">
+      <img src="animation/animate_3.png" alt="Frame 3">
+      <img src="animation/animate_4.png" alt="Frame 4">
+      <img src="animation/animate_5.png" alt="Frame 5">
+      <img src="animation/animate_6.png" alt="Frame 6">
+      <img src="animation/animate_7.png" alt="Frame 7">
+      <img src="animation/animate_8.png" alt="Frame 8">
+      <img src="animation/animate_9.png" alt="Frame 9">
+      <img src="animation/animate_10.png" alt="Frame 10">
+      <img src="animation/animate_11.png" alt="Frame 11">
+      <img src="animation/animate_12.png" alt="Frame 12">
+      <img src="animation/animate_13.png" alt="Frame 13">
+      <img src="animation/animate_14.png" alt="Frame 14">
+      <img src="animation/animate_15.png" alt="Frame 15">
+      <img src="animation/animate_16.png" alt="Frame 16">
+      <img src="animation/animate_17.png" alt="Frame 17">
+      <img src="animation/animate_18.png" alt="Frame 18">
+      <img src="animation/animate_19.png" alt="Frame 19">
+      <img src="animation/animate_20.png" alt="Frame 20">
+      <img src="animation/animate_21.png" alt="Frame 21">
+  </div>
+
   <div class="text-box">
-    <img src="envelope.png" class="fit-image" alt="Description of the image">
-    <button class="nice_button" onclick="playAudioAndAnimate(this)">Open Me</button>
+    <img src="envelope.png" class="fit-image" id="envelopeImage" alt="Envelope">
+    <button style="font-family: 'Cormorant Garamond';"class="nice_button" id="actionButton" onclick="playAudioAndAnimate(this)">Open Me</button>
 
     <!-- Audio element -->
-    <audio id="audioFile" src="cropped_beach_boys.mp3"></audio>
-
-    <!-- Sliding images -->
-    <img src="animation/letter.png" class="slide-image slide-from-left" id="leftImage" style="display: none;">
-    <img src="animation/letter_written.png" class="slide-image slide-from-right" id="rightImage" style="display: none;">
+    <!-- <audio id="audioFile" src="cropped_beach_boys.mp3"></audio> -->
   </div>
 
   <script>
     function playAudioAndAnimate(button) {
-      const audio = document.getElementById('audioFile');
-      const leftImage = document.getElementById('leftImage');
-      const rightImage = document.getElementById('rightImage');
+      // const audio = document.getElementById('audioFile');
+      const envelopeImage = document.getElementById('envelopeImage');
+      const animationContainer = document.getElementById('animationContainer');
+      const actionButton = document.getElementById('actionButton');
+
 
       // Play audio
-      audio.play();
+      // audio.play();
 
-      // Bounce the button
-      button.classList.add('bouncing');
+      // Hide the envelope image
+      envelopeImage.classList.add('hidden');
 
-      // After the bounce, show and animate images
+      // Hide the button
+      actionButton.classList.add('hidden');
+
+      // Move the animation container to the center
       setTimeout(() => {
-        button.classList.remove('bouncing');
-        leftImage.style.display = 'block';
-        rightImage.style.display = 'block';
+        animationContainer.classList.add('visible');
 
-        // Add slide animations
-        leftImage.classList.add('slide-from-left');
-        rightImage.classList.add('slide-from-right');
-      }, 5000); // Wait for 5 bounces (2.5 seconds)
+        // Start the sequential image animation
+        const images = document.querySelectorAll('.image-container img');
+        let currentIndex = 0;
 
-      // Fade out the entire screen after animations
-      setTimeout(() => {
-        document.body.classList.add('fade-screen'); // Trigger full-screen fade-out
-      }, 10000); // Total time for bounce (2.5s) + slide (5s)
+        function showNextImage() {
+          images[currentIndex].classList.remove('active'); // Hide current image
+          currentIndex = (currentIndex + 1) % images.length; // Move to the next index
+          images[currentIndex].classList.add('active'); // Show next image
+        }
 
-      // Navigate to the next page after the full-screen fade-out
-      setTimeout(() => {
-        window.location.href = "saveTheDate.html";
-      }, 16000); // Total time for bounce (2.5s) + slide (5s) + screen fade (5s)
+        // Change images every 
+        const animation_time_step = 230;
+        const interval = setInterval(showNextImage, animation_time_step);
+
+        // Fade to the next page after animation
+        setTimeout(() => {
+          clearInterval(interval); // Stop the image animation
+          images[0].classList.remove('active'); // Hide current image
+          images[images.length-1].classList.add('active'); // Hide current image
+
+          // Fade out after cycling
+          animationContainer.style.transition = 'opacity 2s ease';
+          animationContainer.style.opacity = '0';
+
+          setTimeout(() => {
+            document.body.classList.add('fade-screen'); // Trigger full-screen fade-out
+            window.location.href = "saveTheDate.html"; // Navigate to the next page
+          }, 2000); // Wait for the fade-out to complete
+        }, images.length * animation_time_step); // Adjust timing to finish after the last frame
+      }, 250); // Delay before showing the animation
     }
+
   </script>
 </body>
 </html>

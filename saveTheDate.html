@@ -13,6 +13,8 @@
 
     body.fade-in {
       opacity: 1; /* Fully visible */
+      transition: opacity 1s ease-in-out; /* Fade-in and fade-out transitions */
+
     }
 
     /* Existing styles */
@@ -31,24 +33,29 @@
 
     .fit-image {
       display: block; /* Makes the image a block element #f2e6e6 #edb4ab */
-      margin: 0 auto; /* Centers the image horizontally 390000 */
+      margin: 0 auto; /* Centers the image horizontally  */
       max-width: 40%; /* Ensures it fits within the container */ 
       height: auto;
     }
+
+  @font-face {
+    font-family:"Cormorant Garamond";
+    src: url("./fonts/CormorantGaramond-Regular.ttf") format("truetype");
+  }
+
+
   </style>
 </head>
 <body> 
-  <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Bagnard'; color: #b51a09; font-size: 30px; background-color: #390000;"> 
+  <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Cormorant Garamond'; font-weight: lighter; color: #b51a09; font-size: 30px; background-color: #f2e6e6;"> 
     <div class="text-box">
       <img src="swans.png" class="fit-image" alt="Description of the image" style="align: center;">
       <p style="text-align: center;">
         Hi! We're getting married on Saturday, August 2, 2025 at the UC Berkeley Botanical Garden.
       </p>
       <p style="text-align: center;">
-        Details to come.
-        <br>
-        <a style="color:#390000; font-family: 'Futura'" href="https://forms.gle/yZaFxAAuVBA7cGVa6">Let us know if you can make it</a>
-        <sup style="font-size: 10px;font-family: 'Futura'">asap please!</sup>
+        <a style="color:#edb4ab; font-family: 'Cormorant Garamond'" href="https://forms.gle/yZaFxAAuVBA7cGVa6">Can you make it?</a>
+        <!-- <sup style="font-size: 10px;font-family: 'Cormorant Garamond'">let us know asap please!</sup> -->
         <br>
         <p style="text-align: center;">— Fred and Nora</p>
       </p>
