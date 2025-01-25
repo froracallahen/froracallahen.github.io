@@ -26,7 +26,6 @@
 
     }
 
-
     .text-box {
       width: 50%;
       margin: 0 auto;
@@ -51,7 +50,7 @@
 
     .nice_button {
       position: absolute;
-      top: 85%;
+      top: 35%;
       left: 50%;
       transform: translate(-50%, -50%);
       background-color: #b51a09;
@@ -72,23 +71,25 @@
     }
 
     .image-container {
-      width: 50%; /* Set width of the image area */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden; /* Hide anything outside the boundaries */
-      position: absolute;
-      top: -500px; /* Start off-screen (above the viewport) */
-      left: 50%;
-      transform: translate(-50%, 0); /* Center horizontally */
-      opacity: 0; /* Invisible initially */
-      transition: top 1s ease, opacity 1s ease; /* Smooth transition to center */
+      position: absolute; /* Use absolute positioning */
+      top: 50%; /* Center vertically */
+      left: 50%; /* Center horizontally */
+      transform: translate(-50%, -50%); /* Adjust for element size */
+      width: 500px;
+      height: 500px;
+      overflow: hidden;
     }
 
-    .image-container.visible {
-      top: 50%; /* Move to the center */
-      transform: translate(-50%, -65%); /* Adjust for perfect centering */
-      opacity: 1; /* Make visible */
+    .image-container img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out; /* Smooth fade transition */
+    }
+
+    .image-container img.active {
+      opacity: 1; /* Fully visible when active */
     }
 
     img {
@@ -135,7 +136,7 @@
   </div>
 
   <div class="text-box">
-    <img src="envelope.png" class="fit-image" id="envelopeImage" alt="Envelope">
+    <!-- <img src="animation/animate_1.png" class="fit-image" id="envelopeImage" alt="Envelope"> -->
     <button style="font-family: 'Cormorant Garamond';"class="nice_button" id="actionButton" onclick="playAudioAndAnimate(this)">Open Me</button>
 
     <!-- Audio element -->
@@ -145,7 +146,7 @@
   <script>
     function playAudioAndAnimate(button) {
       // const audio = document.getElementById('audioFile');
-      const envelopeImage = document.getElementById('envelopeImage');
+      // const envelopeImage = document.getElementById('envelopeImage');
       const animationContainer = document.getElementById('animationContainer');
       const actionButton = document.getElementById('actionButton');
 
@@ -154,7 +155,7 @@
       // audio.play();
 
       // Hide the envelope image
-      envelopeImage.classList.add('hidden');
+      // envelopeImage.classList.add('hidden');
 
       // Hide the button
       actionButton.classList.add('hidden');
@@ -174,7 +175,7 @@
         }
 
         // Change images every 
-        const animation_time_step = 230;
+        const animation_time_step = 150;
         const interval = setInterval(showNextImage, animation_time_step);
 
         // Fade to the next page after animation
@@ -192,7 +193,7 @@
             window.location.href = "saveTheDate.html"; // Navigate to the next page
           }, 2000); // Wait for the fade-out to complete
         }, images.length * animation_time_step); // Adjust timing to finish after the last frame
-      }, 250); // Delay before showing the animation
+      }, 100); // Delay before showing the animation
     }
 
   </script>
