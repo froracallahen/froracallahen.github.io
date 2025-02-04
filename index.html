@@ -8,16 +8,18 @@
     /* General styles */
     body {
       display: flex;
+      flex-direction: column; /* Stack elements vertically */
       justify-content: center;
       align-items: center;
       height: 100vh;
       font-family: 'Rosmerta', sans-serif;
       color: #b51a09;
-      font-size: 30px;
+      font-size: 4vw; /* Adjust font size dynamically */
       background-color: #faf9f5;
       margin: 0;
-      overflow: hidden;
-      transition: opacity 5s ease; /* Smooth fade-out transition for everything */
+      overflow-x: hidden; /* Prevent horizontal scroll */
+      transition: opacity 5s ease;
+      text-align: center;
     }
 
     .fade-screen {
@@ -26,10 +28,11 @@
 
     }
 
+    /* Ensure text container is responsive */
     .text-box {
-      width: 50%;
-      margin: 0 auto;
-      padding: 20px;
+      width: 80%; /* Adjust width for smaller screens */
+      max-width: 500px;
+      padding: 5%;
       background-color: #faf9f5;
       border-radius: 8px;
       text-align: center;
@@ -48,48 +51,50 @@
       pointer-events: none; /* Prevent interaction with the envelope */
     }
 
+    /* Button styling */
     .nice_button {
-      position: absolute;
-      top: 35%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      position: relative;
+      top: 10%;
       background-color: #b51a09;
       color: white;
       border: none;
-      padding: 10px 20px;
-      font-size: 30px;
-      font-family: 'Rosmerta',
+      padding: 10px 20px; /* Fixed padding for a balanced look */
+      font-size: 18px; /* Keep a reasonable size */
       cursor: pointer;
       border-radius: 8px;
       text-decoration: none;
-      transition: opacity 0.5s ease; /* Smooth fade-out for the button */
+      transition: opacity 0.5s ease;
+      max-width: 200px; /* Prevent excessive width */
+      width: auto; /* Let content define width */
     }
 
+    /* Ensure button scales properly */
     .nice_button.hidden {
-      opacity: 0; /* Hide the button */
-      pointer-events: none; /* Disable interaction */
+      opacity: 0;
+      pointer-events: none;
     }
 
+
+    /* Make image container responsive */
     .image-container {
-      position: absolute; /* Use absolute positioning */
-      top: 50%; /* Center vertically */
-      left: 50%; /* Center horizontally */
-      transform: translate(-50%, -50%); /* Adjust for element size */
-      width: 500px;
-      height: 500px;
+      position: relative;
+      width: 80vw; /* Use viewport width */
+      max-width: 500px; /* Limit size */
+      height: auto;
+      aspect-ratio: 1; /* Maintain square shape */
       overflow: hidden;
     }
 
+    /* Responsive images */
     .image-container img {
-      position: absolute;
       width: 100%;
-      height: 100%;
+      height: auto;
       opacity: 0;
-      transition: opacity 1s ease-in-out; /* Smooth fade transition */
+      transition: opacity 1s ease-in-out;
     }
 
     .image-container img.active {
-      opacity: 1; /* Fully visible when active */
+      opacity: 1;
     }
 
     img {
@@ -106,6 +111,24 @@
     @font-face {
     font-family:"Cormorant Garamond";
     src: url("./fonts/CormorantGaramond-Regular.ttf") format("truetype");
+  }
+
+    /* Mobile-specific styles */
+  @media (max-width: 768px) {
+    body {
+      font-size: 5vw; /* Increase font size on smaller screens */
+    }
+
+    .image-container {
+      width: 90vw;
+      max-width: 300px; /* Limit width */
+    }
+
+    .nice_button {
+      font-size: 16px; /* Slightly smaller */
+      padding: 8px 16px; /* Adjust padding */
+      max-width: 180px; /* Keep it compact */
+    }
   }
 
   </style>
